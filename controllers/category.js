@@ -22,6 +22,21 @@ function addCategory(req,res) {
     });
 }
 
+function getCategories(req,res) {
+    Category.find().sort({order: "asc"}).exec((err, categoriesStored) => {
+        if(err) {
+            res.status(500).send({message: "Error del servidor."});
+        } else {
+            if(!categoriesStored) {
+                res.status(404).send({message: "No se encontró ninguna categoría."});
+            } else {
+                res.status(200).send({category: categoriesStored});
+            }
+        }
+    });
+}
+
 module.exports = {
-    addCategory
+    addCategory,
+    getCategories
 }

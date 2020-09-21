@@ -90,10 +90,27 @@ function deleteCategory(req,res) {
     });
 }
 
+function getCategory(req,res) {
+    const{url} = req.params;
+
+    Category.find({"url": url}).exec((err, result) => {
+        if(err) {
+            res.status(500).send({message: "Error del servidor"});
+        } else {
+            if(!result) {
+                res.status(404).send({message: "No se encontró la categoría."});
+            } else {
+                res.status(200).send({category: result});
+            }
+        }
+    });
+}
+
 module.exports = {
     addCategory,
     getCategories,
     updateCategory,
     activateCategory,
-    deleteCategory
+    deleteCategory,
+    getCategory
 }

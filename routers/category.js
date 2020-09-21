@@ -15,4 +15,6 @@ api.put("/activate-category/:id", [md_auth.ensureAuth], CategoryController.activ
 
 api.delete("/delete-category/:id", [md_auth.ensureAuth], CategoryController.deleteCategory);
 
+api.get("/get-category/:url", CategoryController.getCategory);
+
 module.exports = api;

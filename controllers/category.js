@@ -53,8 +53,30 @@ function updateCategory(req,res) {
     });
 }
 
+function activateCategory(req,res) {
+    const {id} = req.params;
+    const {active} = req.body;
+
+    Category.findByIdAndUpdate(id, {active}, (err, categoryUpdate) => {
+        if(err) {
+            res.status(500).send({message: "Error del servidor."});
+        } else {
+            if(!categoryUpdate) {
+                res.status(404).send({message: "No se encontró la categoría."});
+            } else {
+                if(active === true) {
+                    res.status(200).send({message: "Categoría activada"});
+                } else {
+                    res.status(200).send({message: "Categoría desactivada."});
+                }
+            }
+        }
+    });
+}
+
 module.exports = {
     addCategory,
     getCategories,
-    updateCategory
+    updateCategory,
+    activateCategory
 }

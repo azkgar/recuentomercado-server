@@ -36,7 +36,25 @@ function getCategories(req,res) {
     });
 }
 
+function updateCategory(req,res) {
+    let categoryData = req.body;
+    const params = req.params;
+
+    Category.findByIdAndUpdate(params.id, categoryData, (err, categoryUpdate) => {
+        if(err) {
+            res.status(500).send({message: "Error del servidor."});
+        } else {
+            if(!categoryUpdate) {
+                res.status(404).send({message: "No se encontró la categoría."});
+            } else {
+                res.status(200).send({message: "Categoría actualizada."});
+            }
+        }
+    });
+}
+
 module.exports = {
     addCategory,
-    getCategories
+    getCategories,
+    updateCategory
 }

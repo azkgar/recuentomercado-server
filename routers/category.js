@@ -9,4 +9,6 @@ api.post("/add-category", [md_auth.ensureAuth], CategoryController.addCategory);
 
 api.get("/get-categories", CategoryController.getCategories);
 
+api.put("/update-category/:id", [md_auth.ensureAuth], CategoryController.updateCategory);
+
 module.exports = api;

@@ -7,4 +7,6 @@ const api = express.Router();
 
 api.post("/add-menu", [md_auth.ensureAuth], MenuController.addMenu);
 
+api.get("/get-menus", MenuController.getMenus);
+
 module.exports = api;

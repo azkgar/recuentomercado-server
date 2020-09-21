@@ -74,9 +74,26 @@ function activateCategory(req,res) {
     });
 }
 
+function deleteCategory(req,res) {
+    const {id} = req.params;
+
+    Category.findByIdAndRemove(id, (err, categoryDeleted) => {
+        if(err) {
+            res.status(500).send({message: "Error del servidor."});
+        } else {
+            if(!categoryDeleted) {
+                res.status(404).send({message: "Categoría no encontrada."});
+            } else {
+                res.status(200).send({message: "Categoría eliminada."});
+            }
+        }
+    });
+}
+
 module.exports = {
     addCategory,
     getCategories,
     updateCategory,
-    activateCategory
+    activateCategory,
+    deleteCategory
 }

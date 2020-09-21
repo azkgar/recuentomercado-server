@@ -13,4 +13,6 @@ api.put("/update-category/:id", [md_auth.ensureAuth], CategoryController.updateC
 
 api.put("/activate-category/:id", [md_auth.ensureAuth], CategoryController.activateCategory);
 
+api.delete("/delete-category/:id", [md_auth.ensureAuth], CategoryController.deleteCategory);
+
 module.exports = api;

@@ -3,7 +3,7 @@ const mongoosePaginate = require("mongoose-paginate-v2");
 
 const Schema = mongoose.Schema;
 
-const VideoSchema = Schema({
+const PodcastSchema = Schema({
     title: String,
     url: {
         type: String,
@@ -16,6 +16,6 @@ const VideoSchema = Schema({
     description: String
 });
 
-VideoSchema.plugin(mongoosePaginate);
+PodcastSchema.plugin(mongoosePaginate);
 
-module.exports = mongoose.model("Video", VideoSchema);
+module.exports = mongoose.model("Podcast", PodcastSchema);

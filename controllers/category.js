@@ -106,11 +106,28 @@ function getCategory(req,res) {
     });
 }
 
+function getCategoryTag(req,res) {
+    const {tag} = req.params;
+
+    Category.find({"tag": tag}).exec((err, result) => {
+        if(err) {
+            res.status(500).send({message: "Error del servidor."});
+        } else {
+            if(!result) {
+                res.status(404).send({message: "Error del servidor."});
+            } else {
+                res.status(200).send({category: result});
+            }
+        }
+    });
+}
+
 module.exports = {
     addCategory,
     getCategories,
     updateCategory,
     activateCategory,
     deleteCategory,
-    getCategory
+    getCategory,
+    getCategoryTag
 }

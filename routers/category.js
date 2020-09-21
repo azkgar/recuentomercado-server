@@ -17,4 +17,6 @@ api.delete("/delete-category/:id", [md_auth.ensureAuth], CategoryController.dele
 
 api.get("/get-category/:url", CategoryController.getCategory);
 
+api.get("/get-category-tag/:tag", CategoryController.getCategoryTag);
+
 module.exports = api;

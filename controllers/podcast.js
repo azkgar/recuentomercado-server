@@ -1,5 +1,4 @@
 const Podcast = require("../models/podcast");
-const post = require("../models/post");
 
 function addPodcast(req,res){
     const body = req.body;

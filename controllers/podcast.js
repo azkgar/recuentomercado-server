@@ -18,6 +18,29 @@ function addPodcast(req,res){
     });
 }
 
+function getPaginatedPodcast(req,res){
+    const {page = 1, limit = 10} = req.query;
+
+    const options = {
+        page,
+        limit: parseInt(limit),
+        sort: {date: "desc"}
+    };
+
+    Podcast.paginate({}, options, (error, podcastsStored) => {
+        if(error){
+            res.status(500).send({code: 500, message: "Error del servidor."});
+        } else {
+            if(!podcastsStored) {
+                res.status(404).send({code: 404, message: "No se encontró ningún podcast."});
+            } else {
+                res.status(200).send({code:200, podcasts: podcastsStored});
+            }
+        }
+    });
+}
+
 module.exports = {
-    addPodcast
+    addPodcast,
+    getPaginatedPodcast
 }

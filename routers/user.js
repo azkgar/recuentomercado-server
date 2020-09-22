@@ -17,4 +17,6 @@ api.route("/users")
 
 api.get("/users-active", [md_auth.ensureAuth], UserController.getUsersActive);
 
+api.put("/update-user/:id", [md_auth.ensureAuth], UserController.updateUser);
+
 module.exports = api;

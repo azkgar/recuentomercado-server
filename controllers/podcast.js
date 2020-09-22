@@ -89,10 +89,38 @@ function getPodcast(req,res){
     });
 }
 
+function getAllPodcasts(req,res){
+    Podcast.find().then(podcasts => {
+        if(!podcasts) {
+            res.status(404).send({message: "No se encontraron podcasts."});
+        } else {
+            res.status(200).send({podcasts});
+        }
+    });
+}
+
+function getPodcastsRelated(req,res){
+    const {tag} = req.params;
+
+    Podcast.find({"categories":tag}).exec((err, result) => {
+        if(err) {
+            res.status(500).send({message:"Error del servidor."});
+        } else {
+            if(!result) {
+                res.status(404).send({message: "No se encontraron Podcasts"});
+            } else {
+                res.status(200).send({podcasts: result});
+            }
+        }
+    });
+}
+
 module.exports = {
     addPodcast,
     getPaginatedPodcast,
     updatePodcast,
     deletePodcast,
-    getPodcast
+    getPodcast,
+    getAllPodcasts,
+    getPodcastsRelated
 }

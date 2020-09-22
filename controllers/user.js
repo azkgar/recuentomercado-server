@@ -85,8 +85,21 @@ function getUsers(req,res) {
     });
 }
 
+function getUsersActive(req,res){
+    const query = req.query;
+
+    User.find({active: query.active}).then(users => {
+        if(!users) {
+            res.status(404).send({message: "No se encontraron usuarios activos."});
+        } else {
+            res.status(200).send({users});
+        }
+    });
+}
+
 module.exports = {
     signUp,
     signIn,
-    getUsers
+    getUsers,
+    getUsersActive
 }

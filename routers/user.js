@@ -12,4 +12,7 @@ api.route("/signup")
 api.route("/signin")
 .post(UserController.signIn);
 
+api.route("/users")
+.get([md_auth.ensureAuth], UserController.getUsers);
+
 module.exports = api;

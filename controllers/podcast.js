@@ -40,7 +40,59 @@ function getPaginatedPodcast(req,res){
     });
 }
 
+function updatePodcast(req,res){
+    const podcastData = req.body;
+    const {id} = req.params;
+
+    Podcast.findByIdAndUpdate(id, podcastData, (err, podcastUpdate) => {
+        if(err) {
+            res.status(500).send({code:500,message:"Error del servidor."});
+        } else {
+            if(!podcastUpdate) {
+                res.status(404).send({code:404,message:"No se encontró el podcast."});
+            } else {
+                res.status(200).send({code:200,message: "Podcast actualizado correctamente."});
+            }
+        }
+    });
+}
+
+function deletePodcast(req,res){
+    const {id} = req.params;
+
+    Podcast.findByIdAndRemove(id, (err, podcastDeleted) => {
+        if(err) {
+            res.status(500).send({code:500,message:"Error del servidor."});
+        } else {
+            if(!podcastDeleted) {
+                res.status(400).send({code:400,message:"Podcast no encontrado."});
+            } else {
+                res.status(200).send({code:200,message:"Podcast eliminado"});
+            }
+        }
+    });
+}
+
+function getPodcast(req,res){
+    const {url} = req.params;
+
+    Podcast.findOne({url}, (err,podcastStored) => {
+        if(err){
+            res.status(500).send({code:500,message: "Error del servidor."});
+        } else {
+            if(!podcastStored) {
+                res.status(404).send({code:404,message:"Podcast no encontrado."});
+            } else {
+                res.status(200).send({code:200,podcast: podcastStored});
+            }
+        }
+    });
+}
+
 module.exports = {
     addPodcast,
-    getPaginatedPodcast
+    getPaginatedPodcast,
+    updatePodcast,
+    deletePodcast,
+    getPodcast
 }

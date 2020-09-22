@@ -9,4 +9,10 @@ api.post("/add-podcast", [md_auth.ensureAuth], PodcastController.addPodcast);
 
 api.get("/get-paginated-podcasts", PodcastController.getPaginatedPodcast);
 
+api.put("/update-podcast/:id", [md_auth.ensureAuth], PodcastController.updatePodcast);
+
+api.delete("/delete-podcast/:id", [md_auth.ensureAuth], PodcastController.deletePodcast);
+
+api.get("/get-podcast/:url", PodcastController.getPodcast);
+
 module.exports = api;

@@ -28,7 +28,7 @@ function refreshAccessToken(req,res) {
                     res.status(404).send({message: "Usuario no encontrado."});
                 } else {
                     res.status(200).send({
-                        accesToken: jwt.createAccessToken(userStored),
+                        accessToken: jwt.createAccessToken(userStored),
                         refreshToken: refreshToken
                     });
                 }

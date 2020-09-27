@@ -89,11 +89,16 @@ function getVideo(req,res){
 }
 
 function getAllVideos(req,res){
-    Video.find().then(videos => {
-        if(!videos) {
-            res.status(404).send({message: "No se encontraron videos."});
+    const {search} = req.params;
+    Video.find({"title": search}).exec((err,result) => {
+        if(err) {
+            res.status(500).send({message: "Error del servidor."});
         } else {
-            res.status(200).send({videos});
+            if(!result) {
+                res.status(404).send({message: "No se encontraron videos."});
+            } else {
+                res.status(200).send({posts: result});
+            }
         }
     });
 }

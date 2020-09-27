@@ -89,11 +89,17 @@ function getPodcast(req,res){
 }
 
 function getAllPodcasts(req,res){
-    Podcast.find().then(podcasts => {
-        if(!podcasts) {
-            res.status(404).send({message: "No se encontraron podcasts."});
+    const {search} = req.params
+
+    Podcast.find({"title":search}).exec((err,result) => {
+        if(err) {
+            res.status(500).send({message: "Error del servidor."});
         } else {
-            res.status(200).send({podcasts});
+            if(!result) {
+                res.status(404).send({message: "No se encontraron podcasts."});
+            } else {
+                res.status(200).send({posts: result});
+            }
         }
     });
 }

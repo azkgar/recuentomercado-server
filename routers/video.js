@@ -15,7 +15,7 @@ api.delete("/delete-video/:id", [md_auth.ensureAuth], VideoController.deleteVide
 
 api.get("/get-video/:url", VideoController.getVideo);
 
-api.get("/get-all-videos/:search", VideoController.getAllVideos);
+api.get("/get-all-videos/", VideoController.getAllVideos);
 
 api.get("/get-videos-related/:tag", VideoController.getVideosRelated);
 

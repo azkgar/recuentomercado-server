@@ -15,7 +15,7 @@ api.delete("/delete-podcast/:id", [md_auth.ensureAuth], PodcastController.delete
 
 api.get("/get-podcast/:url", PodcastController.getPodcast);
 
-api.get("/get-all-podcasts/:search", PodcastController.getAllPodcasts);
+api.get("/get-all-podcasts/", PodcastController.getAllPodcasts);
 
 api.get("/get-podcasts-related/:tag", PodcastController.getPodcastsRelated);
 

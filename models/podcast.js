@@ -13,7 +13,8 @@ const PodcastSchema = Schema({
     categories: Array,
     username: String,
     cover: String,
-    description: String
+    description: String,
+    link: String
 });
 
 PodcastSchema.plugin(mongoosePaginate);

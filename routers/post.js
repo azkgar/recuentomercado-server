@@ -15,7 +15,7 @@ api.delete("/delete-post/:id", [md_auth.ensureAuth], PostController.deletePost);
 
 api.get("/get-post/:url", PostController.getPost);
 
-api.get("/get-all-posts/:search", PostController.getAllPosts);
+api.get("/get-all-posts/", PostController.getAllPosts);
 
 api.get("/get-posts-related/:tag", PostController.getPostsRelated);
 
